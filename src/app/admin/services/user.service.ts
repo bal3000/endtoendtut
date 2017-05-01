@@ -15,12 +15,7 @@ export class UserService implements CanActivate {
 
   constructor(private router: Router) {
     firebase.initializeApp({
-      apiKey: "AIzaSyAOUa56W_pzedMGPOTSlYCMmPCMgfXJ97o",
-      authDomain: "tut-project-848f7.firebaseapp.com",
-      databaseURL: "https://tut-project-848f7.firebaseio.com",
-      projectId: "tut-project-848f7",
-      storageBucket: "tut-project-848f7.appspot.com",
-      messagingSenderId: "718640497619"
+
     });
   }
 
@@ -46,7 +41,6 @@ export class UserService implements CanActivate {
 
   verifyUser() {
     this.authUser = firebase.auth().currentUser;
-    console.log('firebase: ', firebase.auth().currentUser);
 
     if (this.authUser) {
       console.log(`Welcome ${this.authUser.email}`);

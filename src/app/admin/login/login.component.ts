@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.userService.verifyUser();
   }
 
-  signUp() {
+  signup() {
     this.router.navigate(['/admin/signup']);
   }
 
