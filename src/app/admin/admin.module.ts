@@ -8,8 +8,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { AdminComponent } from './admin/admin.component';
+import { BlogAdminComponent } from './blog-admin/blog-admin.component';
 
 import { UserService } from './services/user.service';
+import { BlogAdminService } from './services/blog-admin.service';
 
 @NgModule({
   imports: [
@@ -17,7 +19,7 @@ import { UserService } from './services/user.service';
     FormsModule,
     AdminRoutingModule
   ],
-  providers: [UserService],
-  declarations: [SignUpComponent, LoginComponent, AdminMenuComponent, AdminComponent]
+  providers: [UserService, BlogAdminService],
+  declarations: [SignUpComponent, LoginComponent, AdminMenuComponent, AdminComponent, BlogAdminComponent]
 })
 export class AdminModule { }
