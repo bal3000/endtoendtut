@@ -13,12 +13,12 @@ export class BlogAdminService {
   }
 
   createPost(post: Blog) {
-    let storageRef = firebase.storage().ref();
+    const storageRef = firebase.storage().ref();
     storageRef.child(`images/${post.imgTitle}`).putString(post.img, 'base64')
       .then((snapshot) => {
-        let url = snapshot.metadata.downloadURLs[0];
-        let dbRef = this.getFirebaseDb();
-        let newPost = dbRef.push();
+        const url = snapshot.metadata.downloadURLs[0];
+        const dbRef = this.getFirebaseDb();
+        const newPost = dbRef.push();
         newPost.set({
           title: post.title,
           content: post.content,

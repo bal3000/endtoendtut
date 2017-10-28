@@ -26,8 +26,8 @@
         "../node_modules/foundation-sites/dist/js/foundation.js",
         "../node_modules/firebase/firebase.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }

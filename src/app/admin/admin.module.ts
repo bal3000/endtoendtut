@@ -12,6 +12,7 @@ import { BlogAdminComponent } from './blog-admin/blog-admin.component';
 
 import { UserService } from './services/user.service';
 import { BlogAdminService } from './services/blog-admin.service';
+import { BlogAddComponent } from './blog-add/blog-add.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { BlogAdminService } from './services/blog-admin.service';
     AdminRoutingModule
   ],
   providers: [UserService, BlogAdminService],
-  declarations: [SignUpComponent, LoginComponent, AdminMenuComponent, AdminComponent, BlogAdminComponent]
+  declarations: [SignUpComponent, LoginComponent, AdminMenuComponent, AdminComponent, BlogAdminComponent, BlogAddComponent]
 })
 export class AdminModule { }

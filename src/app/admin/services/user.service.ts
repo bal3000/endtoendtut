@@ -15,18 +15,24 @@ export class UserService implements CanActivate {
 
   constructor(private router: Router) {
     firebase.initializeApp({
-
+      apiKey: 'AIzaSyAOUa56W_pzedMGPOTSlYCMmPCMgfXJ97o',
+      authDomain: 'tut-project-848f7.firebaseapp.com',
+      databaseURL: 'https://tut-project-848f7.firebaseio.com',
+      projectId: 'tut-project-848f7',
+      storageBucket: 'tut-project-848f7.appspot.com',
+      messagingSenderId: '718640497619'
     });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
+    const url: string = state.url;
     return this.verifyLogin(url);
   }
 
   verifyLogin(url: string): boolean {
-    if (this.userLoggedIn)
+    if (this.userLoggedIn) {
       return true;
+    }
 
     this.router.navigate(['/admin/login']);
     return false;
@@ -60,7 +66,7 @@ export class UserService implements CanActivate {
   logout() {
     this.userLoggedIn = false;
     firebase.auth().signOut().then(() => {
-      console.log("Logged Out!");
+      console.log('Logged Out!');
       this.loggedInUser = null;
     }, (error) => {
       console.log(`${error.message} Unable to logout. Try Again!`);

@@ -6,7 +6,7 @@ import { UserService } from '../services/user.service';
 import { BlogAdminService } from '../services/blog-admin.service';
 
 import { Blog } from '../model/blog.model';
-import { User } from "../model/user.model";
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-blog-admin',
@@ -40,10 +40,10 @@ export class BlogAdminComponent implements OnInit {
   }
 
   getPosts() {
-    let dbRef = this.blogService.getFirebaseDb();
+    const dbRef = this.blogService.getFirebaseDb();
     dbRef.once('value')
       .then((snapshot) => {
-        let tmp: string[] = snapshot.val();
+        const tmp: string[] = snapshot.val();
         this.blogPosts = Object.keys(tmp).map((key) => tmp[key]);
       }).catch((error) => {
         console.log(error);
