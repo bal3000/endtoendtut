@@ -35,15 +35,17 @@ export class BlogAddComponent implements OnInit {
   }
 
   createPost() {
-    this.post = new Blog(
-      this.postTitle,
-      this.content,
-      this.imgTitle,
-      this.imgSrc.substring(23)
-    );
-    this.blogService.createPost(this.post);
-    alert(`${this.postTitle} added to posts`);
-    this.router.navigate(['/admin']);
+    if (this.imgSrc) {
+      this.post = new Blog(
+        this.postTitle,
+        this.content,
+        this.imgTitle,
+        this.imgSrc.substring(23)
+      );
+      this.blogService.createPost(this.post);
+      alert(`${this.postTitle} added to posts`);
+      this.router.navigate(['/admin']);
+    }
   }
 
   cancel() {
