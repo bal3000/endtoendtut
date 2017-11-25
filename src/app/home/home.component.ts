@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     dbRef.once('value')
       .then((snapshot: firebase.database.DataSnapshot) => {
         const tmp: string[] = snapshot.val();
-        this.blogPosts = Object.keys(tmp).map((key) => tmp[key]);
+        this.blogPosts = Object.keys(tmp).map((key) => tmp[key] as Blog);
       }).catch((error) => {
         console.log(error);
       });
