@@ -10,10 +10,12 @@ import { LoginComponent } from './login/login.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 import { AdminComponent } from './admin/admin.component';
 import { BlogAdminComponent } from './blog-admin/blog-admin.component';
+import { BlogAddComponent } from './blog-add/blog-add.component';
+import { ProductAdminComponent } from './product-admin/product-admin.component';
 
 import { UserService } from './services/user.service';
 import { BlogAdminService } from './services/blog-admin.service';
-import { BlogAddComponent } from './blog-add/blog-add.component';
+import { ProductAdminService } from './services/product-admin.service';
 
 @NgModule({
   imports: [
@@ -22,7 +24,15 @@ import { BlogAddComponent } from './blog-add/blog-add.component';
     AdminRoutingModule,
     SharedModule
   ],
-  providers: [UserService, BlogAdminService],
-  declarations: [SignUpComponent, LoginComponent, AdminMenuComponent, AdminComponent, BlogAdminComponent, BlogAddComponent]
+  providers: [UserService, BlogAdminService, ProductAdminService],
+  declarations: [
+    SignUpComponent,
+    LoginComponent,
+    AdminMenuComponent,
+    AdminComponent,
+    BlogAdminComponent,
+    BlogAddComponent,
+    ProductAdminComponent
+  ]
 })
 export class AdminModule { }

@@ -1,0 +1,103 @@
+<div class="top-bar">
+  <div class="top-bar-title">Product Admin area</div>
+
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li class="admin-menu">
+        <a (click)="chooseMode('add')">Add Product</a>
+      </li>
+      <li *ngIf="menuChoice" class="admin-menu">
+        <a (click)="chooseMode('')">Manage Products</a>
+      </li>
+      <li class="admin-menu">
+        <a [routerLink]="['/admin']">Back to Admin</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="theUser" class="top-bar-right">
+    <ul class="menu">
+      <li class="admin-menu">
+        <a (click)="logout()">Logout</a>
+      </li>
+      <li class="admin-menu">
+        <a>{{theUser.displayName}} ({{theUser.email}}) Logged in</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div [ngSwitch]="menuChoice">
+  <div *ngSwitchCase="'add'">
+    <app-blog-add></app-blog-add>
+  </div>
+  <div *ngSwitchDefault>
+
+    <div *ngIf="!selectedProduct" class="row">
+      <div class="row" *ngFor="let product of productPosts">
+        <div class="row spacer">
+          <div class="media-object">
+            <div class="media-object-section">
+              <div class="align-self-middle">
+                <img class="mini-img" [src]="product.img" />
+              </div>
+            </div>
+            <div class="media-object-section main-section">
+              <h4>{{product.name}}</h4>
+              <p>{{product.description | truncate:140}}</p>
+              <p>£ {{product.price}}</p>
+              <div class="button-group align-center">
+                <a class="button" (click)="editProduct(product)">Edit</a>
+                <a class="button alert" (click)="deleteProduct(product)">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedProduct" class="row">
+      <form>
+        <div class="row">
+          <div class="medium-12 columns">
+            <h3>Edit Product</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <label>Product Name
+              <input type="text" [(ngModel)]="selectedProduct.name" name="editName" required #psName="ngModel" />
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <label>Price
+              <input type="text" [(ngModel)]="selectedProduct.price" name="editPrice" required #psPrice="ngModel" />
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-12 medium-6 columns">
+            <label>Description
+              <textarea rows="15" id="description" [(ngModel)]="selectedProduct.description" name="editDescription" required #psDescription="ngModel"></textarea>
+            </label>
+          </div>
+          <div class="small-12 medium-6 columns">
+            <img [src]="selectedProduct.img" alt="Image preview..." />
+          </div>
+        </div>
+
+        <div class="row align-center">
+          <div class="small-12 columns">
+            <div class="expanded button-group">
+              <button class="success button" type="button" [disabled]="!psName.valid || !psDescription.valid || !psPrice.valid" (click)="updateProduct()">Update Post</button>
+              <button class="cancel button" type="button" (click)="cancelEdit()">Cancel Edit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

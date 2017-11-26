@@ -16,6 +16,20 @@ export class ProductAdminService {
     return firebase.storage().ref().child(`product_images/${imgTitle}`);
   }
 
+  async getAllProducts(): Promise<Product[]> {
+    try {
+      const dbRef = this.getFirebaseDb();
+      const snapshot: firebase.database.DataSnapshot = await dbRef.once('value');
+      const tmp: string[] = snapshot.val();
+      if (tmp && tmp !== null) {
+        return Object.keys(tmp).map((key) => tmp[key] as Product);
+      }
+      return [];
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   createProduct(product: Product) {
     const storageRef = this.getFirebaseStorage(product.imgTitle);
     storageRef.putString(product.img, 'base64')
@@ -41,6 +55,23 @@ export class ProductAdminService {
         price: product.price
       });
       alert('product updated');
+    } else {
+      alert('product does not exist');
+    }
+  }
+
+  removeProduct(product: Product) {
+    const dbRef = this.getFirebaseDb().child(product.id);
+    if (dbRef) {
+      dbRef.remove();
+      const storageRef = this.getFirebaseStorage(product.imgTitle);
+      if (storageRef) {
+        storageRef
+          .delete()
+          .then(() => console.log(`${product.imgTitle} was deleted from storage`))
+          .catch((error) => console.log('Error occured', error));
+      }
+      alert('product deleted');
     } else {
       alert('product does not exist');
     }
